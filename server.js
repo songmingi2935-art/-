@@ -6,7 +6,7 @@ app.use(express.json({limit:"50mb"}));
 const secret=process.env.SESSION_SECRET||"change-me";
 function sign(v){return crypto.createHmac("sha256",secret).update(v).digest("hex")}
 function hasAdminEntry(req){const c=req.headers.cookie||"";const m=c.match(/admin_entry=([^;]+)/);return m&&m[1]===sign("entry")}
-app.get(process.env.ADMIN_PATH||"/admin-entry-hidden",(req,res)=>{res.setHeader("Set-Cookie",`admin_entry=${sign("entry")}; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=2592000`);res.redirect("/")});
+app.get("/vault-7qN4mK2x9R",(req,res)=>{res.setHeader("Set-Cookie",`admin_entry=${sign("entry")}; HttpOnly; SameSite=Lax; Secure; Path=/; Max-Age=2592000`);res.redirect("/")});
 app.use(express.static("public"));
 const pool=new Pool({connectionString:process.env.DATABASE_URL,ssl:{rejectUnauthorized:false}});
 function isAdmin(req){const c=req.headers.cookie||"";const m=c.match(/admin=([^;]+)/);return m&&m[1]===sign("admin")}
