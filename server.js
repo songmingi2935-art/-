@@ -2,7 +2,7 @@ const express=require("express");
 const crypto=require("crypto");
 const {Pool}=require("pg");
 const app=express();
-app.use(express.json({limit:"10mb"}));
+app.use(express.json({limit:"50mb"}));
 app.use(express.static("public"));
 const pool=new Pool({connectionString:process.env.DATABASE_URL,ssl:{rejectUnauthorized:false}});
 const secret=process.env.SESSION_SECRET||"change-me";
